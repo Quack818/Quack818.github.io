@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Quackの小窝</title><link>https://quack818.github.io/posts/</link><description>Recent content in Posts on Quackの小窝</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Wed, 08 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://quack818.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Hugo 搭建一个和本站类似的博客</title><link>https://quack818.github.io/posts/zheteng/2/</link><pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate><guid>https://quack818.github.io/posts/zheteng/2/</guid><description>&lt;img src="https://quack818.github.io/" alt="Featured image of post 使用 Hugo 搭建一个和本站类似的博客" /&gt;&lt;h2 id="前言"&gt;前言
+&lt;/h2&gt;&lt;p&gt;这篇文章想记录一下，如何搭建一个和本站类似的个人博客。&lt;/p&gt;
+&lt;p&gt;本站主要使用 &lt;strong&gt;Hugo + GitHub Pages&lt;/strong&gt; 搭建。对个人博客来说，这套方案最大的优点是成本很低，可以做到 0 成本建站；同时，Hugo 生成的是静态网页，访问速度快，部署也比较稳定。&lt;/p&gt;
+&lt;p&gt;当然，它也不是完全没有门槛。和一些后台式博客系统不同，这种方式更新文章时，通常需要在本地修改 Markdown 文件，然后再把改动提交到 GitHub。对于完全不熟悉 Git 的人来说，前期会稍微麻烦一点。&lt;/p&gt;
+&lt;p&gt;另外，如果你不希望别人直接复制你的整个博客源码，也可以采用我现在使用的方案：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;私有仓库：保存 Hugo 源码、文章 Markdown、主题配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;公开仓库：只保存 Hugo 生成后的网页文件
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这样别人可以访问你的博客页面，但不容易直接拿到完整的 Hugo 项目源码。&lt;/p&gt;
+&lt;h2 id="准备基础环境"&gt;准备基础环境
+&lt;/h2&gt;&lt;p&gt;搭建 Hugo 博客本身并不算复杂。你可以直接搜索 Hugo 官网，然后查看官方的 Quick Start 文档。不过为了方便理解，我这里还是按照自己的实践过程重新整理一遍。&lt;/p&gt;
+&lt;p&gt;首先需要准备两个基础工具：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hugo&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hugo 下载地址：&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/gohugoio/hugo" target="_blank" rel="noopener"
+ &gt;Hugo 下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Hugo 下载页面" class="gallery-image" data-flex-basis="710px" data-flex-grow="296" height="380" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://quack818.github.io/posts/zheteng/2/picture/1.png" srcset="https://quack818.github.io/posts/zheteng/2/picture/1_hu_ef3b197ef97ca307.png 800w, https://quack818.github.io/posts/zheteng/2/picture/1.png 1125w" width="1125"&gt;&lt;/p&gt;
+&lt;p&gt;Git 下载地址：&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://git-scm.com/" target="_blank" rel="noopener"
+ &gt;Git 下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装 Hugo 时，建议选择 &lt;strong&gt;Extended&lt;/strong&gt; 版本。Extended 版本在普通 Hugo 的基础上，增加了对 SCSS、Sass、PostCSS 等资源处理能力的支持。很多现代 Hugo 主题都会用到 SCSS，比如本站使用的 Stack 主题，所以建议直接安装 Extended 版本。&lt;/p&gt;
+&lt;p&gt;安装完成后，可以使用下面的命令检查是否安装成功：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;hugo&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果命令行无法显示 Hugo 版本，通常说明 Hugo 没有正确加入系统环境变量。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Hugo 环境变量配置" class="gallery-image" data-flex-basis="734px" data-flex-grow="306" height="300" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://quack818.github.io/posts/zheteng/2/picture/2.png" srcset="https://quack818.github.io/posts/zheteng/2/picture/2_hu_f964d878cff9ce15.png 800w, https://quack818.github.io/posts/zheteng/2/picture/2.png 918w" width="918"&gt;&lt;/p&gt;
+&lt;p&gt;图中是我的 Hugo 安装路径。你实际配置时，需要替换成自己电脑上的路径。如果下载后的目录里没有 &lt;code&gt;bin&lt;/code&gt; 文件夹，也可以自己新建一个 &lt;code&gt;bin&lt;/code&gt; 文件夹，然后把 Hugo 可执行文件移动进去，再把这个 &lt;code&gt;bin&lt;/code&gt; 路径加入系统环境变量。&lt;/p&gt;
+&lt;h2 id="开始搭建"&gt;开始搭建
+&lt;/h2&gt;&lt;p&gt;基础环境准备完成后，可以先创建一个新的 Hugo 项目：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;hugo&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="n"&gt;quickstart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中 &lt;code&gt;quickstart&lt;/code&gt; 是项目名称，你也可以改成自己喜欢的名字。&lt;/p&gt;
+&lt;p&gt;Hugo 官方 Quick Start 示例里使用的是 Ananke 主题，但本站使用的是 &lt;strong&gt;Stack&lt;/strong&gt; 主题。没有什么特别复杂的理由，主要官方展示的这个大佬的主题布局和视觉效果真的太好看了。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Stack 主题页面" class="gallery-image" data-flex-basis="720px" data-flex-grow="300" height="851" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://quack818.github.io/posts/zheteng/2/picture/3.png" srcset="https://quack818.github.io/posts/zheteng/2/picture/3_hu_e1106ebf4cbeb3d3.png 800w, https://quack818.github.io/posts/zheteng/2/picture/3_hu_5d434b73e0944fd0.png 1600w, https://quack818.github.io/posts/zheteng/2/picture/3_hu_ffeb9ecc9daaf0c7.png 2400w, https://quack818.github.io/posts/zheteng/2/picture/3.png 2555w" width="2555"&gt;&lt;/p&gt;
+&lt;p&gt;如果你也想使用 Stack 主题，建议一定安装 Hugo Extended 版本，否则主题中的 SCSS 资源可能无法正常处理。&lt;/p&gt;
+&lt;p&gt;在项目根目录执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;submodule&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="p"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;CaiJimmy&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;hugo-theme&lt;/span&gt;&lt;span class="n"&gt;-stack&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt; &lt;span class="n"&gt;themes&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;hugo-theme&lt;/span&gt;&lt;span class="n"&gt;-stack&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后在 Hugo 配置文件中指定主题：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;theme = &amp;#39;hugo-theme-stack&amp;#39;&amp;#34;&lt;/span&gt; &lt;span class="err"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;hugo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toml&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接着启动本地预览：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;hugo&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;-D&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果命令正常运行，就可以在浏览器里打开本地地址，预览属于自己的博客了。&lt;/p&gt;
+&lt;p&gt;到这里，本地博客已经可以跑起来。但如果想让别人也能访问，就需要部署到 GitHub Pages。&lt;/p&gt;
+&lt;h2 id="上传到-github-pages"&gt;上传到 GitHub Pages
+&lt;/h2&gt;&lt;p&gt;首先需要创建一个 GitHub 仓库。仓库名称必须使用下面这种格式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;username.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中 &lt;code&gt;username&lt;/code&gt; 替换成你的 GitHub 用户名。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="创建 GitHub Pages 仓库" class="gallery-image" data-flex-basis="249px" data-flex-grow="103" height="1194" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://quack818.github.io/posts/zheteng/2/picture/4.png" srcset="https://quack818.github.io/posts/zheteng/2/picture/4_hu_971fb031443acca2.png 800w, https://quack818.github.io/posts/zheteng/2/picture/4.png 1240w" width="1240"&gt;&lt;/p&gt;
+&lt;p&gt;为什么要这样命名？这是 GitHub Pages 的用户站点命名规则。如果感兴趣，可以查看官方文档：&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://docs.github.com/en/pages/quickstart" target="_blank" rel="noopener"
+ &gt;GitHub Pages 快速开始&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;仓库可见性选择 &lt;code&gt;Public&lt;/code&gt;。创建完成后，如果默认分支不是 &lt;code&gt;main&lt;/code&gt;，可以在仓库设置中把默认分支调整为 &lt;code&gt;main&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;接着回到本地 Hugo 项目，在项目根目录执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;hugo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;commit&lt;/span&gt; &lt;span class="n"&gt;-m&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Update Hugo site&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;remote&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="p"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;你的用户名&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;你的仓库名&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;git&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="n"&gt;-u&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里简单解释一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hugo&lt;/code&gt;：生成静态网页文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git add .&lt;/code&gt;：添加本地改动&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git commit -m &amp;quot;Update Hugo site&amp;quot;&lt;/code&gt;：提交本次改动&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git remote add origin ...&lt;/code&gt;：绑定远程 GitHub 仓库&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git push -u origin main&lt;/code&gt;：把本地内容推送到 GitHub&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;推送完成后，可以进入 GitHub 仓库查看 Actions 或 Pages 的部署状态。&lt;/p&gt;
+&lt;p&gt;如果一切正常，访问下面这个地址就能看到你的博客：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;https://你的用户名.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;到这里，一个基础的 Hugo + GitHub Pages 博客就搭建完成了。&lt;/p&gt;
+&lt;h2 id="后续更新文章"&gt;后续更新文章
+&lt;/h2&gt;&lt;p&gt;后续写文章时，可以在本地项目根目录执行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;hugo&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;文章名字&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;md
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这样会生成一篇新的 Markdown 文章。&lt;/p&gt;
+&lt;p&gt;我自己的文章目录会稍微再整理一下。比如我会把文章统一放在 &lt;code&gt;content/posts&lt;/code&gt; 下面，然后按照分类或主题继续建立文件夹，每篇文章再单独放进一个独立目录。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="文章目录结构" class="gallery-image" data-flex-basis="1191px" data-flex-grow="496" height="250" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="https://quack818.github.io/posts/zheteng/2/picture/5.png" srcset="https://quack818.github.io/posts/zheteng/2/picture/5_hu_5895af482e2bf247.png 800w, https://quack818.github.io/posts/zheteng/2/picture/5.png 1241w" width="1241"&gt;&lt;/p&gt;
+&lt;p&gt;这样做的好处是：文章和图片可以放在同一个文章目录下，后续引用图片会更方便。&lt;/p&gt;
+&lt;p&gt;例如文章目录可以这样组织：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;content/posts/zheteng/2/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── index.md
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└── picture/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├── 2-cover.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └── 1.png
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在文章中引用图片时，直接写：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;![&lt;span class="nt"&gt;图片说明&lt;/span&gt;](&lt;span class="na"&gt;picture/1.png&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;写完文章后，执行下面几条命令即可更新博客：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;commit&lt;/span&gt; &lt;span class="n"&gt;-m&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;更新博客文章&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;需要注意的是，Hugo 文章一般使用 Markdown 格式。如果之前没有接触过 Markdown，可以先学习一些基础语法，比如标题、换行、图片、链接、代码块等。&lt;/p&gt;
+&lt;p&gt;到这里，这篇 Hugo + GitHub Pages 建站教程就结束了。&lt;/p&gt;</description></item><item><title>国内使用 Codex 教程</title><link>https://quack818.github.io/posts/zheteng/1/</link><pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate><guid>https://quack818.github.io/posts/zheteng/1/</guid><description>&lt;img src="https://quack818.github.io/" alt="Featured image of post 国内使用 Codex 教程" /&gt;&lt;h2 id="前言"&gt;前言
+&lt;/h2&gt;&lt;p&gt;因为之前岗位的原因，我平时对 AI 的需求并不算特别复杂。大多数情况下，像 Gemini 这类网页对话式 AI，已经能解决我日常工作中遇到的很多问题。&lt;/p&gt;
+&lt;p&gt;不过最近我想补一补运维开发里“开发”这一块的能力，也就绕不开现在很火的 Vibe Coding。另一方面，AI 编程确实已经越来越常见了。即便暂时还不能完全理解背后的原理，至少先会用、能入门，也算是跟上时代的一种方式。&lt;/p&gt;
+&lt;p&gt;我最早对 CLI 编程产生兴趣，是在 Claude Code 很火的时候。为了体验一下“在终端里和 AI 一起写代码”到底是什么感觉，我当时买过智谱 AI 的 CLM 编程套餐。那会儿有活动，大概 48 元三个月，性价比还不错。后来我又试过 Minimax。&lt;/p&gt;
+&lt;p&gt;不过这些国内模型在实际使用中也有一些问题，比如需要抢购、CLI 对话里偶尔有换行 Bug、整体体验不够稳定。于是我就更好奇：OpenAI 的 Codex 用起来到底是什么感觉？&lt;/p&gt;
+&lt;p&gt;简单说，就是想体验一下这些更偏前沿的 AI 编程工具。加入光荣的进化吧。&lt;/p&gt;
+&lt;p&gt;需要说明的是，OpenAI 的 Codex 目前在中国大陆没有官方直接开放使用，因此实际使用会有一些门槛。正规方式通常需要海外支付方式，成本和准备工作都相对高一些。下面记录的是我这次使用 Codex 的折腾过程，仅供参考。&lt;/p&gt;
+&lt;h2 id="下载-codex"&gt;下载 Codex
+&lt;/h2&gt;&lt;p&gt;先下载 Codex 客户端。下面是官方入口：&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://chatgpt.com/zh-Hans-CN/codex/" target="_blank" rel="noopener"
+ &gt;Codex 下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载完成后正常安装即可。我这里使用的是 Windows，所以后面的说明也以 Windows 为主。Mac 版本整体流程差别不大。&lt;/p&gt;
+&lt;h2 id="登录-codex"&gt;登录 Codex
+&lt;/h2&gt;&lt;p&gt;登录时我使用的是之前注册过的 Google 账号。&lt;/p&gt;
+&lt;p&gt;这里不一定必须使用 Google 邮箱，网易、QQ 等邮箱理论上也可以，只要能正常接收邮件并完成登录流程即可。&lt;/p&gt;
+&lt;h2 id="手机号验证"&gt;手机号验证
+&lt;/h2&gt;&lt;p&gt;这里需要特别注意：不推荐使用接码平台。&lt;/p&gt;
+&lt;p&gt;原因很简单：接码平台通常只能完成单次验证，后续如果账号再次触发验证，很可能就无法继续使用，风险比较高。&lt;/p&gt;
+&lt;p&gt;我这次发现了一个比较有意思的机制：如果直接用 ChatGPT 账号登录 Codex，并且账号没有 ChatGPT Plus，可能会要求进行海外手机号验证。但如果先在 ChatGPT 里订阅了 Plus，再登录 Codex，手机号验证这一步就不会出现。&lt;/p&gt;
+&lt;p&gt;另外，也可以尝试使用一些海外邮箱服务注册账号，也同样能避免出现海外手机号验证，例如：&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://account.proton.me" target="_blank" rel="noopener"
+ &gt;Proton Mail&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="订阅-plus-套餐"&gt;订阅 Plus 套餐
+&lt;/h2&gt;&lt;p&gt;Codex 的使用通常需要 ChatGPT Plus 或对应的订阅权限。&lt;/p&gt;
+&lt;p&gt;如果没有海外支付方式，可以考虑找相对稳定的代充渠道。代充的优点是速度快、有人处理售后；缺点是价格通常会更贵，而且也存在一定风险。因此不建议随便在不熟悉的平台上购买。&lt;/p&gt;
+&lt;p&gt;下面是我常用的两个代充地址，可以按价格和服务情况自行选择。短期体验可以先选便宜的；如果准备长期订阅，我个人更推荐选择售后更稳定的平台且推荐第二个代充地址，长期订阅比较优惠。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://mall.aipayok.com/" target="_blank" rel="noopener"
+ &gt;代充地址 1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://bewild.ai/subscribe" target="_blank" rel="noopener"
+ &gt;代充地址 2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果只是短期体验，可以先订阅一个月试试；如果确定长期使用，再考虑更稳定的方案。&lt;/p&gt;
+&lt;h2 id="网络环境"&gt;网络环境
+&lt;/h2&gt;&lt;p&gt;Codex 在国内使用时，对网络环境有一定要求。如果使用过程中经常出现断连、重连、请求失败等情况，可以检查代理是否稳定。&lt;/p&gt;
+&lt;p&gt;如果你使用的是代理工具，可以开启 TUN 模式。&lt;/p&gt;
+&lt;p&gt;我常用的网络工具地址：&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://ikuuu.win/auth/login" target="_blank" rel="noopener"
+ &gt;网络工具地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这里更推荐使用付费节点，稳定性会比免费节点好不少。&lt;/p&gt;
+&lt;p&gt;到这里，教程就结束了。&lt;/p&gt;
+&lt;p&gt;加入光荣的进步吧。&lt;/p&gt;</description></item></channel></rss>
