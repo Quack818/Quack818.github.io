@@ -1,0 +1,738 @@
+/* ========================================
+   自定义样式 - 彻底修复暗色模式
+   ======================================== */
+
+/* 浅色模式背景 */
+body {
+    background-color: #f5f5f7 !important;
+}
+
+/* ========================================
+   暗色模式全局样式
+   ======================================== */
+[data-scheme="dark"] {
+    /* 核心颜色变量 */
+    --body-background: #000000 !important;
+    --card-background: #1a1a1a !important;
+    --card-background-selected: #2a2a2a !important;
+    --body-text-color: #e0e0e0 !important;
+
+    /* 卡片文字颜色 */
+    --card-text-color-main: #ffffff !important;
+    --card-text-color-secondary: #d4d4d4 !important;
+    --card-text-color-tertiary: #a0a0a0 !important;
+
+    /* 强调色 - 金色 */
+    --accent-color: #d4af37 !important;
+    --accent-color-darker: #c5a028 !important;
+    --accent-color-text: #000000 !important;
+
+    /* 分隔线 */
+    --card-separator-color: rgba(212, 175, 55, 0.3) !important;
+
+    /* 代码块颜色 */
+    --code-background-color: #0d0d0d !important;
+    --code-text-color: #e0e0e0 !important;
+    --pre-background-color: #0d0d0d !important;
+    --pre-text-color: #e0e0e0 !important;
+
+    /* 表格颜色 */
+    --table-border-color: rgba(212, 175, 55, 0.3) !important;
+    --tr-even-background-color: rgba(255, 255, 255, 0.03) !important;
+
+    /* 引用块颜色 */
+    --blockquote-background-color: rgba(212, 175, 55, 0.1) !important;
+
+    /* 键盘快捷键 */
+    --kbd-border-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+/* 暗色模式背景 */
+[data-scheme="dark"] body {
+    background-color: #000000 !important;
+    color: #e0e0e0 !important;
+}
+
+/* ========================================
+   文章内容区域样式
+   ======================================== */
+
+/* 浅色模式文章内容 */
+.article-content {
+    color: #2d3748 !important;
+}
+
+/* 暗色模式文章内容 */
+[data-scheme="dark"] .article-content {
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式主文章容器 */
+[data-scheme="dark"] .main-article {
+    background-color: #1a1a1a !important;
+}
+
+/* 暗色模式文章详情 */
+[data-scheme="dark"] .article-details {
+    color: #e0e0e0 !important;
+}
+
+/* ========================================
+   页面级别容器样式（关于页面等）
+   ======================================== */
+
+/* 暗色模式页面整体背景 */
+[data-scheme="dark"] .article-page {
+    background-color: #000000 !important;
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式主文章容器 */
+[data-scheme="dark"] .article-page .main-article {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式页面内容段落 */
+[data-scheme="dark"] .article-content p {
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式页面内容列表 */
+[data-scheme="dark"] .article-content ul,
+[data-scheme="dark"] .article-content ol {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] .article-content li {
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式页面内容链接 */
+[data-scheme="dark"] .article-content a {
+    color: #d4af37 !important;
+}
+
+[data-scheme="dark"] .article-content a:hover {
+    color: #e5c158 !important;
+}
+
+/* 暗色模式页面内容强调 */
+[data-scheme="dark"] .article-content strong,
+[data-scheme="dark"] .article-content b {
+    color: #ffffff !important;
+}
+
+/* 暗色模式页面内容斜体 */
+[data-scheme="dark"] .article-content em,
+[data-scheme="dark"] .article-content i {
+    color: #d4d4d4 !important;
+}
+
+/* 暗色模式页面内容引用块 */
+[data-scheme="dark"] .article-content blockquote {
+    color: #d4d4d4 !important;
+}
+
+[data-scheme="dark"] .article-content blockquote p {
+    color: #d4d4d4 !important;
+}
+
+/* 暗色模式页面内容引用块中的链接 */
+[data-scheme="dark"] .article-content blockquote a {
+    color: #d4af37 !important;
+}
+
+/* 暗色模式页面内容分隔线 */
+[data-scheme="dark"] .article-content hr {
+    background-color: rgba(212, 175, 55, 0.3) !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* 暗色模式页面内容图片说明 */
+[data-scheme="dark"] .article-content figcaption {
+    color: #a0a0a0 !important;
+}
+
+/* 暗色模式页面内容表格单元格 */
+[data-scheme="dark"] .article-content td,
+[data-scheme="dark"] .article-content th {
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式页面内容表头 */
+[data-scheme="dark"] .article-content th {
+    color: #ffffff !important;
+}
+
+/* 暗色模式页面内容代码 */
+[data-scheme="dark"] .article-content code {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] .article-content pre {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] .article-content pre code {
+    color: #e0e0e0 !important;
+}
+
+/* 暗色模式页面内容脚注 */
+[data-scheme="dark"] .article-content .footnotes {
+    color: #a0a0a0 !important;
+}
+
+[data-scheme="dark"] .article-content .footnotes p {
+    color: #a0a0a0 !important;
+}
+
+[data-scheme="dark"] .article-content .footnotes a {
+    color: #d4af37 !important;
+}
+
+/* 暗色模式所有text节点 */
+[data-scheme="dark"] .main-article,
+[data-scheme="dark"] .article-content,
+[data-scheme="dark"] .article-content *,
+[data-scheme="dark"] .article-details,
+[data-scheme="dark"] .article-details * {
+    text-shadow: none !important;
+}
+
+/* 强制覆盖所有可能的文字颜色 */
+[data-scheme="dark"] .article-page p,
+[data-scheme="dark"] .article-page span,
+[data-scheme="dark"] .article-page div,
+[data-scheme="dark"] .article-page li,
+[data-scheme="dark"] .article-page td,
+[data-scheme="dark"] .article-page th {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] .article-page h1,
+[data-scheme="dark"] .article-page h2,
+[data-scheme="dark"] .article-page h3,
+[data-scheme="dark"] .article-page h4,
+[data-scheme="dark"] .article-page h5,
+[data-scheme="dark"] .article-page h6 {
+    color: #ffffff !important;
+}
+
+[data-scheme="dark"] .article-page a {
+    color: #d4af37 !important;
+}
+
+[data-scheme="dark"] .article-page strong,
+[data-scheme="dark"] .article-page b {
+    color: #ffffff !important;
+}
+
+/* ========================================
+   标题样式
+   ======================================== */
+
+/* 浅色模式标题 */
+h1, h2, h3, h4, h5, h6 {
+    color: #1a202c !important;
+}
+
+/* 暗色模式标题 */
+[data-scheme="dark"] h1,
+[data-scheme="dark"] h2,
+[data-scheme="dark"] h3,
+[data-scheme="dark"] h4,
+[data-scheme="dark"] h5,
+[data-scheme="dark"] h6 {
+    color: #ffffff !important;
+}
+
+[data-scheme="dark"] .article-title,
+[data-scheme="dark"] .article-title a {
+    color: #ffffff !important;
+}
+
+[data-scheme="dark"] .article-subtitle {
+    color: #d4d4d4 !important;
+}
+
+/* ========================================
+   链接样式
+   ======================================== */
+
+/* 暗色模式链接 */
+[data-scheme="dark"] a {
+    color: #d4af37 !important;
+}
+
+[data-scheme="dark"] a:hover {
+    color: #e5c158 !important;
+}
+
+/* 暗色模式文章元数据 */
+[data-scheme="dark"] .article-meta,
+[data-scheme="dark"] .article-meta time,
+[data-scheme="dark"] .article-meta a,
+[data-scheme="dark"] .article-meta span {
+    color: #a0a0a0 !important;
+}
+
+/* ========================================
+   代码块样式
+   ======================================== */
+
+/* 暗色模式行内代码 */
+[data-scheme="dark"] code {
+    background-color: #0d0d0d !important;
+    color: #e0e0e0 !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+
+/* 暗色模式代码块 */
+[data-scheme="dark"] pre {
+    background-color: #0d0d0d !important;
+    color: #e0e0e0 !important;
+    border: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-scheme="dark"] pre code {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* 暗色模式代码高亮容器 */
+[data-scheme="dark"] .highlight {
+    background-color: #0d0d0d !important;
+}
+
+/* 暗色模式复制代码按钮 */
+[data-scheme="dark"] .copyCodeButton {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ========================================
+   引用块样式
+   ======================================== */
+
+/* 暗色模式引用块 */
+[data-scheme="dark"] blockquote {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+    border-left-color: #d4af37 !important;
+    color: #d4d4d4 !important;
+}
+
+/* 暗色模式引用块链接 */
+[data-scheme="dark"] blockquote a {
+    color: #d4af37 !important;
+}
+
+/* ========================================
+   表格样式
+   ======================================== */
+
+/* 暗色模式表格 */
+[data-scheme="dark"] table {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] th {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #ffffff !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-scheme="dark"] td {
+    border-color: rgba(212, 175, 55, 0.2) !important;
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* ========================================
+   列表样式
+   ======================================== */
+
+/* 暗色模式列表 */
+[data-scheme="dark"] ul,
+[data-scheme="dark"] ol {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] li {
+    color: #e0e0e0 !important;
+}
+
+/* ========================================
+   分隔线样式
+   ======================================== */
+
+/* 暗色模式分隔线 */
+[data-scheme="dark"] hr {
+    background-color: rgba(212, 175, 55, 0.3) !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ========================================
+   图片说明样式
+   ======================================== */
+
+/* 暗色模式图片说明 */
+[data-scheme="dark"] figcaption {
+    color: #a0a0a0 !important;
+}
+
+/* ========================================
+   侧边栏和小部件样式
+   ======================================== */
+
+/* 暗色模式侧边栏 */
+[data-scheme="dark"] .sidebar {
+    background-color: #0a0a0a !important;
+}
+
+/* 暗色模式小部件 */
+[data-scheme="dark"] .widget {
+    background-color: #1a1a1a !important;
+}
+
+[data-scheme="dark"] .widget-title {
+    color: #ffffff !important;
+}
+
+[data-scheme="dark"] .widget tagCloud a {
+    color: #d4af37 !important;
+}
+
+/* 暗色模式标签云 */
+[data-scheme="dark"] .tagCloud-tags a {
+    color: #e0e0e0 !important;
+    background-color: rgba(212, 175, 55, 0.1) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-scheme="dark"] .tagCloud-tags a:hover {
+    background-color: rgba(212, 175, 55, 0.2) !important;
+    color: #d4af37 !important;
+}
+
+/* ========================================
+   页脚样式
+   ======================================== */
+
+/* 暗色模式页脚 */
+[data-scheme="dark"] footer {
+    background-color: #0a0a0a !important;
+    color: #a0a0a0 !important;
+}
+
+[data-scheme="dark"] footer a {
+    color: #d4af37 !important;
+}
+
+/* ========================================
+   导航菜单样式
+   ======================================== */
+
+/* 暗色模式导航 */
+[data-scheme="dark"] .menu {
+    background-color: #0a0a0a !important;
+}
+
+[data-scheme="dark"] .menu a {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] .menu a:hover {
+    color: #d4af37 !important;
+}
+
+/* ========================================
+   搜索样式
+   ======================================== */
+
+/* 暗色模式搜索框 */
+[data-scheme="dark"] .search-input {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-scheme="dark"] .search-input::placeholder {
+    color: #a0a0a0 !important;
+}
+
+/* ========================================
+   分页样式
+   ======================================== */
+
+/* 暗色模式分页 */
+[data-scheme="dark"] .pagination a,
+[data-scheme="dark"] .pagination span {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-scheme="dark"] .pagination a:hover {
+    background-color: rgba(212, 175, 55, 0.2) !important;
+    color: #d4af37 !important;
+}
+
+/* ========================================
+   分类和标签样式
+   ======================================== */
+
+/* 暗色模式分类标签 */
+[data-scheme="dark"] .article-category a,
+[data-scheme="dark"] .article-tags a {
+    background-color: rgba(212, 175, 55, 0.2) !important;
+    color: #d4af37 !important;
+}
+
+[data-scheme="dark"] .article-category a:hover,
+[data-scheme="dark"] .article-tags a:hover {
+    background-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ========================================
+   目录样式
+   ======================================== */
+
+/* 暗色模式目录 */
+[data-scheme="dark"] .toc-nav {
+    background-color: #1a1a1a !important;
+}
+
+[data-scheme="dark"] .toc-nav a {
+    color: #e0e0e0 !important;
+}
+
+[data-scheme="dark"] .toc-nav a:hover {
+    color: #d4af37 !important;
+}
+
+[data-scheme="dark"] .toc-nav li.active-class > a {
+    border-left-color: #d4af37 !important;
+    color: #d4af37 !important;
+}
+
+[data-scheme="dark"] .article-toc-title {
+    color: #a0a0a0 !important;
+}
+
+/* ========================================
+   警告框样式
+   ======================================== */
+
+/* 暗色模式警告框 */
+[data-scheme="dark"] blockquote.alert {
+    border-left-width: 4px !important;
+}
+
+[data-scheme="dark"] blockquote.alert-note {
+    background-color: rgba(52, 152, 219, 0.15) !important;
+    border-left-color: #3498db !important;
+}
+
+[data-scheme="dark"] blockquote.alert-tip {
+    background-color: rgba(46, 204, 113, 0.15) !important;
+    border-left-color: #2ecc71 !important;
+}
+
+[data-scheme="dark"] blockquote.alert-important {
+    background-color: rgba(52, 152, 219, 0.15) !important;
+    border-left-color: #3498db !important;
+}
+
+[data-scheme="dark"] blockquote.alert-warning {
+    background-color: rgba(241, 196, 15, 0.15) !important;
+    border-left-color: #f1c40f !important;
+}
+
+[data-scheme="dark"] blockquote.alert-caution {
+    background-color: rgba(231, 76, 60, 0.15) !important;
+    border-left-color: #e74c3c !important;
+}
+
+/* 暗色模式警告框标题 */
+[data-scheme="dark"] blockquote.alert .alert-title {
+    color: #ffffff !important;
+}
+
+/* 暗色模式警告框内容 */
+[data-scheme="dark"] blockquote.alert .alert-body {
+    color: #e0e0e0 !important;
+}
+
+/* ========================================
+   键盘快捷键样式
+   ======================================== */
+
+/* 暗色模式键盘按键 */
+[data-scheme="dark"] kbd {
+    background-color: #2a2a2a !important;
+    border-color: rgba(212, 175, 55, 0.5) !important;
+    color: #e0e0e0 !important;
+}
+
+/* ========================================
+   滚动条样式
+   ======================================== */
+
+/* 暗色模式滚动条 */
+[data-scheme="dark"] ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[data-scheme="dark"] ::-webkit-scrollbar-track {
+    background-color: #0a0a0a !important;
+}
+
+[data-scheme="dark"] ::-webkit-scrollbar-thumb {
+    background-color: rgba(212, 175, 55, 0.3) !important;
+    border-radius: 5px;
+}
+
+[data-scheme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+/* ========================================
+   其他元素样式
+   ======================================== */
+
+/* 暗色模式选择文本 */
+[data-scheme="dark"] ::selection {
+    background-color: rgba(212, 175, 55, 0.3) !important;
+    color: #ffffff !important;
+}
+
+/* 暗色模式焦点样式 */
+[data-scheme="dark"] :focus {
+    outline-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+/* 暗色模式按钮 */
+[data-scheme="dark"] button {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-scheme="dark"] button:hover {
+    background-color: rgba(212, 175, 55, 0.2) !important;
+    color: #d4af37 !important;
+}
+
+/* 暗色模式输入框 */
+[data-scheme="dark"] input,
+[data-scheme="dark"] textarea {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-scheme="dark"] input::placeholder,
+[data-scheme="dark"] textarea::placeholder {
+    color: #a0a0a0 !important;
+}
+
+[data-scheme="dark"] input:focus,
+[data-scheme="dark"] textarea:focus {
+    border-color: #d4af37 !important;
+}
+
+/* ========================================
+   Mermaid图表样式
+   ======================================== */
+
+/* 暗色模式Mermaid图表 */
+[data-scheme="dark"] .mermaid {
+    background-color: #1a1a1a !important;
+}
+
+[data-scheme="dark"] .mermaid-toolbar button {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ========================================
+   相册样式
+   ======================================== */
+
+/* 暗色模式相册 */
+[data-scheme="dark"] .gallery {
+    background-color: #1a1a1a !important;
+}
+
+[data-scheme="dark"] .gallery figure {
+    background-color: #0a0a0a !important;
+}
+
+/* ========================================
+   脚注样式
+   ======================================== */
+
+/* 暗色模式脚注 */
+[data-scheme="dark"] .footnotes {
+    color: #a0a0a0 !important;
+}
+
+[data-scheme="dark"] .footnotes a {
+    color: #d4af37 !important;
+}
+
+/* ========================================
+   特殊文本样式
+   ======================================== */
+
+/* 暗色模式标记文本 */
+[data-scheme="dark"] mark {
+    background-color: rgba(212, 175, 55, 0.3) !important;
+    color: #ffffff !important;
+}
+
+/* 暗色模式删除线 */
+[data-scheme="dark"] del {
+    color: #808080 !important;
+}
+
+/* 暗色模式下划线 */
+[data-scheme="dark"] ins {
+    color: #d4af37 !important;
+    text-decoration-color: #d4af37 !important;
+}
+
+/* ========================================
+   归档页面优化
+   ======================================== */
+
+/* 增大紧凑列表文章卡片 */
+.template-archives .article-list--compact article {
+    padding: 20px 25px !important;
+    min-height: 90px !important;
+}
+
+/* 增大紧凑列表标题 */
+.template-archives .article-list--compact article h2.article-title {
+    font-size: 1.7rem !important;
+    line-height: 1.4 !important;
+}
+
+/* 增大紧凑列表缩略图 */
+.template-archives .article-list--compact article .article-image img {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+/* 增大紧凑列表元数据 */
+.template-archives .article-list--compact article .article-meta,
+.template-archives .article-list--compact article .article-meta time {
+    font-size: 1.5rem !important;
+}
